@@ -15,10 +15,6 @@ public interface Dao<T extends Entity> {
 
     T insert(List<T> entity);
 
-    /**
-     * @param entity
-     * @return
-     */
     int update(List<T> entity);
 
     int delete(List<String> ids);
