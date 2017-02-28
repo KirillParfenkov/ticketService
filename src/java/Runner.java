@@ -2,6 +2,7 @@ import com.company.bean.Cinema;
 import com.company.dao.BaseFileDao;
 import com.company.dao.Converter;
 import com.company.dao.Dao;
+import com.company.dao.factory.CinemaDaoFactory;
 
 import java.util.List;
 
@@ -12,26 +13,7 @@ public class Runner {
 
     public static void main(String... args) {
 
-        Dao<Cinema> cinemaDao = new BaseFileDao<Cinema>("D:\\No-Work\\data\\cinema.csv", new Converter<Cinema>() {
-
-            private int ORDER_ID = 0;
-            private int ORDER_NAME = 1;
-            private int ORDER_ADDRESS = 2;
-
-            @Override
-            public Cinema convert(String line) {
-
-                if (line != null) {
-                    Cinema cinema = new Cinema();
-                    String[] snippets = line.split(";");
-                    cinema.setId(snippets[ORDER_ID]);
-                    cinema.setName(snippets[ORDER_NAME]);cinema.setAddress(snippets[ORDER_ADDRESS]);
-                    return cinema;
-                }
-
-                return null;
-            }
-        });
+        Dao<Cinema> cinemaDao = CinemaDaoFactory.getInstance().createDao();
 
         List<Cinema> cinemaList = cinemaDao.findAll();
 
