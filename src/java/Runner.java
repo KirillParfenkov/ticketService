@@ -1,7 +1,10 @@
 import com.company.bean.Cinema;
-import com.company.dao.BaseFileDao;
-import com.company.dao.Converter;
+import com.company.bean.Session;
+import com.company.bean.Ticket;
 import com.company.dao.Dao;
+import com.company.dao.factory.cinama.CinemaDaoFactory;
+import com.company.dao.factory.session.SessionDaoFactory;
+import com.company.dao.factory.ticket.TicketDatabaseDao;
 
 import java.util.List;
 
@@ -12,31 +15,26 @@ public class Runner {
 
     public static void main(String... args) {
 
-        Dao<Cinema> cinemaDao = new BaseFileDao<Cinema>("D:\\No-Work\\data\\cinema.csv", new Converter<Cinema>() {
+        Dao<Cinema> cinemaDao = CinemaDaoFactory
+                .getInstance().createDao();
+        Dao<Session> sessionDao = SessionDaoFactory
+                .getInstance().createDao();
 
-            private int ORDER_ID = 0;
-            private int ORDER_NAME = 1;
-            private int ORDER_ADDRESS = 2;
+        Dao<Ticket> ticketDao = new TicketDatabaseDao();
 
-            @Override
-            public Cinema convert(String line) {
-
-                if (line != null) {
-                    Cinema cinema = new Cinema();
-                    String[] snippets = line.split(";");
-                    cinema.setId(snippets[ORDER_ID]);
-                    cinema.setName(snippets[ORDER_NAME]);cinema.setAddress(snippets[ORDER_ADDRESS]);
-                    return cinema;
-                }
-
-                return null;
-            }
-        });
 
         List<Cinema> cinemaList = cinemaDao.findAll();
 
         for(Cinema cinema: cinemaList) {
             System.out.println(cinema);
+        }
+
+        for(Session session: sessionDao.findAll()) {
+            System.out.println(session);
+        }
+
+        for (Ticket ticket: ticketDao.findAll()) {
+            System.out.println(ticket);
         }
 
     }

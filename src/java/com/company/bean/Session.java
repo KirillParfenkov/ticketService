@@ -51,4 +51,14 @@ public class Session extends Entity {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Session{" +
+                "time='" + time + '\'' +
+                ", movie='" + movie + '\'' +
+                ", cinema='" + cinema + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
