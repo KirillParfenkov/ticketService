@@ -21,8 +21,8 @@ public class SessionFileDaoFactory extends SessionDaoFactory {
     public SessionFileDaoFactory() {
 
         properties = new Properties();
-        InputStream input = getClass().getClassLoader()
-                .getResourceAsStream(APP_PROPERTY_PATH);
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream input = classLoader.getResourceAsStream(APP_PROPERTY_PATH);
 
         try {
             properties.load(input);

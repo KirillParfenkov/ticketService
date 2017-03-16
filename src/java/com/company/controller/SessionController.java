@@ -21,8 +21,8 @@ public class SessionController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //super.doGet(req, resp);
 
-        /*SessionDaoFactory sessionDaoFactory = SessionDaoFactory.getInstance();
-        Dao<Session> dao = sessionDaoFactory.createDao(); */
+        SessionDaoFactory sessionDaoFactory = SessionDaoFactory.getInstance();
+        Dao<Session> dao = sessionDaoFactory.createDao();
         List<Session> sessionList = new ArrayList<>();
         Session session1 = new Session(
                 "1",

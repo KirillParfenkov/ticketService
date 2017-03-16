@@ -10,7 +10,7 @@ import com.company.dao.factory.cinama.CinemaFileDaoFactory;
  */
 public abstract class SessionDaoFactory {
 
-    public final static String APP_PROPERTY_PATH="application.properties";
+    public final static String APP_PROPERTY_PATH = "application.properties";
 
     public static SessionDaoFactory getInstance() {
         return new SessionFileDaoFactory();
